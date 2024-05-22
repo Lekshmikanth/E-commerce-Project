@@ -1,0 +1,28 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+Login page
+{% endblock title %}
+
+{% block content %}
+<div class="featured">Login</div>
+{% include 'shop/inc/message.html' %}
+<div class="container">
+    <form action="#" method="post">
+        {% csrf_token %}
+        <div class="row">
+        <div class="col-6">
+        <div class="mb-2">
+            <label for="" class="form-label">Username</label>
+            <input type="text" name="username" id="username" class="form-control" placeholder="Enter Username">            
+        </div>
+        <div class="mb-2">
+            <label for="" class="form-label">Password</label>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password">            
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}

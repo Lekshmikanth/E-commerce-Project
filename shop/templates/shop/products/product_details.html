@@ -1,0 +1,133 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+{{products.name}}
+{% endblock title %}
+
+{% block content %}
+  
+  <nav aria-label="breadcrumb" class="mx-3 mt-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a style="text-decoration: none;" href="{% url 'home' %}">Home</a></li>
+      <li class="breadcrumb-item"><a style="text-decoration: none;" href="{% url 'collections' %}">Category</a></li>
+      <li class="breadcrumb-item"><a style="text-decoration: none;" href="{% url 'collections' products.category.name %}">{{products.category.name}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{products.name}}</li>
+    </ol>
+  </nav>
+  {% include 'shop/inc/message.html' %}
+<div class="product">
+  <div class="row container">
+  <div class="col-lg-4 col-md-12">
+    <div class="product-image">
+        <img src="{{products.product_image.url}}" alt="">        
+    </div>
+  </div>
+    <div class="col-lg-8 col-md-12">
+    <div class="product-title">{{products.name}}</div>
+    <div class="container-cart">
+        <div class="product-price">
+            <div class="price">Rs.{{products.price}}0</div>
+            <div class="gst">(Excluding 18% GST)</div>
+        </div>
+        {% if products.quantity > 0 %}
+        <input type="hidden" value="{{products.id}}" id="pid">
+        <p>
+          <div class="input-group" style="width: 150px;">
+            <button class="input-group-text bg-success text-light" id="btnminus"><i class="fa fa-minus"></i></button>
+            <input type="text" name="qty" id="txtqty" value="1" class="form-control text-center">
+            <button class="input-group-text bg-success text-light" id="btnplus"><i class="fa fa-plus"></i></button>
+          </div>
+        </p>
+        <div class="add-cart-box">
+            <div class="add-cart"><button class="btn-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button></div>
+        </div>
+        {% else %}
+        <div class="add-cart-box">
+            <div class="add-cart"><button style="background-color: rgb(209, 13, 13);">Out of Stock</button></div>
+        </div>
+        {% endif %}
+        <button class="btn btn-danger" id="btnfav"><i class="fa fa-heart"></i> Add To Favourites</button>
+    </div>
+  </div>
+</div>
+    <div class="product-overview-title"><h3>Overview:</h3></div>
+    <div class="product-overview-p">{{products.description}}</div>
+        <p>* Product Images are shown for illustrative purposes only and may differ from actual product.</p>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", function(event){
+    const btnplus=document.getElementById("btnplus")
+    const btnminus=document.getElementById("btnminus")
+    const txtqty=document.getElementById("txtqty")
+    const pid=document.getElementById("pid")
+    const btncart=document.querySelector(".btn-cart")
+    const btnfav=document.getElementById("btnfav")
+
+    btnplus.addEventListener("click", function(){
+      let qty=parseInt(txtqty.value,10)
+      qty=isNaN(qty)?0:qty
+      if(qty<10){
+        qty++
+        txtqty.value=qty
+      }
+    })
+    btnminus.addEventListener("click", function(){
+      let qty=parseInt(txtqty.value,10)
+      qty=isNaN(qty)?0:qty
+      if(qty>1){
+        qty--
+        txtqty.value=qty
+      }
+    })
+    btncart.addEventListener("click", function(){
+      let qty=parseInt(txtqty.value,10)
+      qty=isNaN(qty)?0:qty
+      if(qty>0){
+        let postobj={
+          product_qty:qty,
+          pid:pid.value
+        }
+        fetch("/addtocart",{
+          method:'POST',
+          credentials:'same-origin',
+          headers:{
+            'Accept':'application/json',
+            'X-Requested-With':'XMLHttpRequest',
+            'X-CSRFToken':'{{ csrf_token }}',
+          },
+          body:JSON.stringify(postobj)
+        }).then(response=>{
+          return response.json()
+        }).then(data=>{
+          alert(data['status'])
+        })
+      }
+      else{
+        alert("Please Enter Quantity")
+      }
+    })
+    btnfav.addEventListener("click", function() {
+      let postobj = {
+        'pid': pid.value
+      }
+      fetch("/fav",{
+        method: 'POST',
+        credentials: 'same-origin',
+        headers:{
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRFToken': '{{ csrf_token }}',
+        },
+        body: JSON.stringify(postobj)
+      }).then(response => {
+        return response.json();
+      }).then(data => {
+        alert(data['status']);
+      });
+    });
+})
+</script>
+{% endblock scripts %}

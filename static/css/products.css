@@ -1,0 +1,118 @@
+.product-title{
+    font-size: 28px;
+    margin: 10px 30px;
+    color: rgb(9, 122, 175);}
+.product-image{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.add-cart-box{
+    display: flex;
+    gap: 20px;
+}
+.product-count{
+   margin: 10px;
+   color: rgb(9, 122, 175);
+   font-weight: 450;
+   letter-spacing: 1px;
+}
+.product-count input{
+    text-align: center;
+    margin-left: 5px;
+    outline: none;
+    width: 50px;
+    border-radius: 5px;
+    padding: 3px 8px;
+    border:2px solid rgba(36, 33, 33, 0.452);
+}
+.product-count input:focus{
+    border: 2px solid  rgb(9, 122, 175);
+}
+.add-cart-box button{
+    padding: 10px;
+    border: none;
+    background-color: rgb(9, 122, 175);
+    color: white;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+.add-cart-box button:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+.container-cart{
+    margin: 10px 80px;
+}
+.price{
+    font-size: 30px;
+    color: rgb(39, 89, 112);
+}
+.product-image img{
+    width: 250px;
+    height: 250px;
+    border: 2px solid rgb(172, 211, 230);
+    border-radius: 10px;
+    margin: 10px 0px;
+    padding: 0px 15px;
+}
+.product h3{
+    font-weight: 600;
+    color: rgb(9, 122, 175);
+}
+.product-overview-p{
+    margin: 10px;
+    text-indent: 150px;
+    text-align: justify;
+}
+.product{
+    margin: 20px;
+}
+.product .para{
+    margin: 10px;
+    word-spacing: 5px;
+    text-align: justify;
+    text-indent: 50px;
+}
+.list li{
+    margin: 15px;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    word-spacing: 3px;
+}
+.product ul{
+    margin: 10px 40px;
+    font-size: 1rem;
+    font-weight: 370;
+}
+.product-features h2{
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: rgb(25, 93, 124);
+}
+.gst{
+    color: rgb(25, 93, 124);
+}
+.product-price{
+    margin-bottom: 10px;
+}
+.product p{
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.74);
+}
+table{
+    margin: 15px 20px;
+    border-collapse: collapse;
+    border-color: rgba(0, 0, 0, 0.322);
+}
+table tr td{
+    padding: 5px 10px;
+    font-size: 1rem;
+    font-weight: 350;
+}
+.sub-heading{
+    font-weight: 500;
+    margin-right: 10px;
+}

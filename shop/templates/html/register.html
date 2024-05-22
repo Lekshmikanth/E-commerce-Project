@@ -1,0 +1,44 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+Register page
+{% endblock title %}
+
+{% block content %}
+<div class="featured">Registration</div>
+{% include 'shop/inc/message.html' %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-5">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-1">
+                <label for="" class="form-label">Username</label>{{form.username}}
+                {% if form.errors.username %}
+                <label style="font-size: 14px;" class="text-danger mt-1">{{form.errors.username}}</label>
+                {% endif %}
+            </div>
+            <div class="mb-1">
+                <label for="" class="form-label">Email</label>{{form.email}}
+                {% if form.errors.email %}
+                <label class="text-danger">{{form.errors.email}}</label>
+                {% endif %}
+            </div>
+            <div class="mb-1">
+                <label for="" class="form-label">Password</label>{{form.password1}}
+                {% if form.errors.password1 %}
+                <label class="text-danger">{{form.errors.password1}}</label>
+                {% endif %}
+            </div>
+            <div class="mb-1">
+                <label for="" class="form-label">Confirm Password</label>{{form.password2}}
+                {% if form.errors.password2 %}
+                <label class="text-danger">{{form.errors.password2}}</label>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

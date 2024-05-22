@@ -1,0 +1,82 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+Checkout page
+{% endblock title %}
+
+{% block content %}
+<div class="featured">Checkout</div>
+{% include 'shop/inc/message.html' %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-5">
+            <form action="" method="post" class="form mt-3">
+                <div class="mb-1">
+                <label for="Name" class="form-label">Name</label>
+                <input type="text" class="form-control" placeholder="Enter Name">
+                </div>
+                <div class="mb-1">
+                <label for="Address" class="form-label">Address</label>
+                <input type="text" class="form-control" placeholder="Enter Address">
+                </div>
+                <div class="mb-1">
+                <label for="City" class="form-label">City</label>
+                <input type="text" class="form-control" placeholder="Enter City">
+                </div>
+                <div class="mb-1">
+                <label for="State" class="form-label">State</label>
+                <input type="text" class="form-control" placeholder="Enter State">
+                </div>
+                <div class="mb-1">
+                <label for="Pincode" class="form-label">Pincode</label>
+                <input type="number" class="form-control" placeholder="Enter Pincode">
+                </div>
+                <div class="mb-1">
+                <label for="contactno" class="form-label">Contact Number</label>
+                <input type="number" class="form-control" placeholder="Enter Contact Number">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h3 class="my-3" style="color: blue;">Order Details:</h3>
+    <table class="table">
+        <tr>
+            <th>Image</th>
+            <th>Product Name</th>
+            <th>Unit</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+        </tr>
+{% for item in cart %}
+<tr>
+    <td><img src="{{item.product.product_image.url}}" height="100px" alt="{{item.product.name}}"></td>
+    <td>{{item.product.name}}</td>
+    <td>{{item.product.price | stringformat:'d'}}</td>
+    <td>{{item.product_qty}}</td>
+    <td class="amt">{{item.total_cost | stringformat:'d'}}</td>
+</tr>
+{% endfor %}
+<tr>
+    <td></td>
+    <td></td>
+    <td colspan="2"><b>Total Amount</b></td>
+    <td id="net">0</td>
+<tr>
+    <td></td>
+    <td></td>
+    <td colspan="3"><a href="{% url 'cardpayment' %}" class="btn btn-primary">Proceed To Payment</a></td>
+</table>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script>
+    const nodes=document.querySelectorAll(".amt")
+    const arr=Array.from(nodes)
+    const res=arr.reduce((acc,cur)=>{
+        return acc+=Number(cur.textContent)
+    },0)
+    document.getElementById("net").innerHTML="Rs."+res
+</script>
+{% endblock scripts %}

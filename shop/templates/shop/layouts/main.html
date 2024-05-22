@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/4e128869ba.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        .container5 {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+    </style>
+</head>
+<body>
+    
+    <div class="nav-bar">
+        <div class="logo">Electronic Components</div>
+        <div class="login">
+            <ul>
+                <li><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="" style="text-transform: capitalize;"><i class="fa fa-users"></i> {{request.user}}</a></li>
+                <li><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'register' %}"><i class="fa fa-users"></i> Register</a></li>
+                <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Login</a></li>
+                {% endif %}
+                <li><a href="{% url 'collections' %}"><i class="fa fa-cubes"></i> Category</a></li>
+                <li><a href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                <li><a href="{% url 'favviewpage' %}"><i class="fa fa-heart"></i> Favourites</a></li>
+            </ul>
+        </div>
+        <div class="menu">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+        </div>
+    </div>
+
+    <div class="title-img">
+        <img src="{% static 'images/titleimg.png' %}" alt="" id="img">
+    </div>
+    {% block content %}
+    {% endblock content %}
+    <div class="container3">
+        <div class="freedelivery">
+           <div class="freedeliveryimg"> <img src="{% static 'images/free-shipping-icon.png' %}" width="100px" height="80px" alt=""></div>
+           <div class="card1">
+           <h3>Free Delivery</h3>
+            <p>On all orders above Rs.499</p>
+        
+        </div> 
+    </div>
+        <div class="cashondelivery">
+            <div class="codimg"><img src="{% static 'images/cash-on-delivery_4947090.png' %}" width="100px" height="80px" alt=""></div>
+            <div class="card1">
+            <h3>Cash on delivery</h3>
+            <p>Payments for major pincodes all over the India</p>
+        </div>
+    </div>
+        <div class="quicksupport">
+            <div class="supportimg"><img src="{% static 'images/customer-care-icon.png' %}" width="100px" height="80px" alt=""></div>
+            <div class="card1">
+            <h3>Quick support</h3>
+            <p>Contact us at: +91 9876543210</p>
+            <p>Timings at: 8 a.m to 6 p.m</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container4">
+        <div class="information1">
+        <h3>Information</h3>
+        <ul>
+            <li><a href="{% url 'payment' %}">Payment</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'shipping' %}">Shipping, Cancellation, Returns & Refund Policy</a></li>
+            <li><a href="{% url 'privacy' %}">Privacy Policy</a></li>
+            <li><a href="{% url 'terms' %}">Terms & Conditions</a></li>
+        </ul>
+        </div>
+
+        <div class="information1">
+            <h3>My Account</h3>
+            <ul>
+                {% if request.user.is_authenticated %}
+                <li><a href="" style="text-transform: capitalize;"><i class="fa fa-users"></i> {{request.user}}</a></li>
+                <li><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'register' %}"><i class="fa fa-users"></i> Register</a></li>
+                <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Login</a></li>
+                {% endif %}
+                <li><a href="{% url 'favviewpage' %}"><i class="fa fa-heart"></i> Favourites</a></li>
+            </ul>
+        </div>
+
+        <div class="information1">
+            <h3>Help & Support</h3>
+            <ul>
+                <li><a href=""><i class="fa fa-phone"></i>  +91 9876543210</a></li>
+                <li><a href=""><i class="fa-regular fa-envelope"></i>  123abc@gmail.com</a></li>
+            </ul>
+        </div>
+        <div class="information1">
+            <h3>Connect With Us</h3>
+            <ul>
+                <li><a href="https://www.facebook.com/electronicscomp/"><i class="fa fa-facebook"></i>  Facebook</a></li>
+                <li><a href="https://twitter.com/ele_comp"><i class="fa fa-twitter"></i>  Twitter</a></li>
+            </ul>
+        </div>
+    </div>
+        <footer>
+            Electronicscomponents.com &copy;
+        </footer>
+    {% block scripts %}
+    {% endblock scripts %}
+    <script>
+        const login=document.querySelector(".login")
+        const menu=document.querySelector(".menu")
+        menu.addEventListener("click",()=>{
+            login.classList.toggle("open")
+        })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>

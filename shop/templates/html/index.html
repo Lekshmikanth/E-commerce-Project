@@ -1,0 +1,21 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+Buy Electronic Components Online
+{% endblock title %}
+
+{% block content %}
+{% include 'shop/inc/message.html' %}
+<div class="featured">featured products</div>
+<div class="container1">
+    {% for item in products %}
+    <div class="box">
+        <div class="box-img"><a href="{% url 'product_details' item.category.name item.name %}"><img src="{{item.product_image.url}}" alt=""></a></div>
+        <div class="box-content">
+            <div class="containertitle"><a href="{% url 'product_details' item.category.name item.name %}">{{item.name}}</a></div><br>
+            <div class="item-price">Rs.{{item.price}}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

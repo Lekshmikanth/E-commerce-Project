@@ -1,0 +1,29 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+Favourite page
+{% endblock title %}
+
+{% block content %}
+<div class="featured">Favourites</div>
+{% include 'shop/inc/message.html' %}
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>Image</th>
+            <th>Product Name</th>
+            <th>Unit</th>
+            <th>Remove</th>
+        </tr>
+        {% for item in fav %}
+        <tr>
+            <td><img src="{{item.product.product_image.url}}" height="100px" alt="{{item.product.name}}"></td>
+            <td>{{item.product.name}}</td>
+            <td>{{item.product.price | stringformat:'d'}}</td>
+            <td><a href="{% url 'remove_fav' item.id %}"  onclick="return confirm('Are You Sure to Remove')"  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Remove</a></td>
+          </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock content %}
